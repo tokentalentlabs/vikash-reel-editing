@@ -12,9 +12,16 @@ Read before planning any edit:
 - `references/animation.md` - every move (push, slide, pop, Ken Burns, PiP) and how `reel_kit` implements it.
 - `references/workflow.md` - research playbook (X search, tweet/clip/photo download), card capture tricks, review checklist of past mistakes.
 
-## Project setup (once per machine)
+## Project setup (check before every new video)
 
-Run `scripts/setup_project.sh <project_dir>`: creates the folder layout, copies the scripts to `<project>/tools/`, the outlet logos to `07_scripts_research/logos/`, and makes `.venv` with `requirements.txt`. Needs ffmpeg (Homebrew or the bundled `imageio-ffmpeg`), Google Chrome (headless captures), and `yt-dlp` for X videos.
+If the project has no `tools/reel_kit.py` or no `.venv/bin/python` with `faster_whisper`, run
+`scripts/setup_project.sh <project_dir>` (from this skill's folder) before anything else. On macOS it:
+- installs `ffmpeg` and `yt-dlp` with Homebrew, and checks Google Chrome, Arial Black and Python 3.9+;
+- makes the folder layout, copies the scripts to `<project>/tools/` and the outlet logos to `07_scripts_research/logos/`;
+- creates `<project>/.venv` with `requirements.txt` (**faster-whisper**, Pillow, numpy, requests, websocket-client);
+- downloads the Whisper **large-v3** model (~3 GB, cached in `~/.cache/huggingface`, once per machine; `--no-model` skips it).
+
+Anything it reports as MISSING (Homebrew, Chrome) needs the user to install it; tell them the exact step. Searching X needs the user signed in to X in the app's browser pane.
 
 ```
 01_footage/raw/            1.mov, 2.mov, 3.mov  (raws in recording order)
